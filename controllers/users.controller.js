@@ -33,9 +33,31 @@ exports.updateUser = (req, res) => {
     } else if (req.body.photoUrl) {
       updatedUser.photoUrl = req.body.photoUrl;
     }
-    console.log(updatedUser);
     res.json(updatedUser);
   } else {
     res.json({ error: "id not valid!" });
+  }
+};
+
+exports.updateBulkUser = (req, res) => {
+  const { ids } = req.body;
+  const { name, gender, contact, address, photoUrl } = req.body;
+  ids.map((id) => {
+    const updatedUser = users.find((user) => user.id === Number(id));
+    if (Number(id)) {
+      const updatedUser = users.find((user) => user.id === Number(id));
+      console.log(updatedUser);
+    } else {
+      res.json({ error: "id not valid!" });
+    }
+  });
+};
+exports.deleteUser = (req, res) => {
+  const { id } = req.params;
+  if (Number(id)) {
+    const filter = users.filter((user) => user.id !== Number(id));
+    res.json(filter);
+  } else {
+    res.json({ error: "Id is Invalid" });
   }
 };
