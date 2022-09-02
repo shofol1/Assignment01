@@ -14,4 +14,28 @@ exports.getRandomAllUser = (req, res) => {
   }
 };
 
-exports.saveNewUser = (req, res) => {};
+exports.saveNewUser = (req, res) => {
+  users.push(req.body);
+  res.json(users);
+};
+exports.updateUser = (req, res) => {
+  const { id } = req.params;
+  if (Number(id)) {
+    const updatedUser = users.find((user) => user.id === Number(id));
+    if (req.body.name) {
+      updatedUser.name = req.body.name;
+    } else if (req.body.gender) {
+      updatedUser.gender = req.body.gender;
+    } else if (req.body.contact) {
+      updatedUser.contact = req.body.contact;
+    } else if (req.body.address) {
+      updatedUser.address = req.body.address;
+    } else if (req.body.photoUrl) {
+      updatedUser.photoUrl = req.body.photoUrl;
+    }
+    console.log(updatedUser);
+    res.json(updatedUser);
+  } else {
+    res.json({ error: "id not valid!" });
+  }
+};
