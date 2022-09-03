@@ -42,15 +42,17 @@ exports.updateUser = (req, res) => {
 exports.updateBulkUser = (req, res) => {
   const { ids } = req.body;
   const { name, gender, contact, address, photoUrl } = req.body;
-  ids.map((id) => {
-    const updatedUser = users.find((user) => user.id === Number(id));
-    if (Number(id)) {
-      const updatedUser = users.find((user) => user.id === Number(id));
-      console.log(updatedUser);
-    } else {
-      res.json({ error: "id not valid!" });
-    }
+  const updatedUser = ids.map((id) => {
+    return users.find((user) => user.id === Number(id));
   });
+  updatedUser.map((user) => {
+    user.name = name;
+    user.gender = gender;
+    user.contact = contact;
+    user.address = address;
+    user.photoUrl = photoUrl;
+  });
+  res.json(updatedUser);
 };
 exports.deleteUser = (req, res) => {
   const { id } = req.params;
