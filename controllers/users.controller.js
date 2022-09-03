@@ -63,3 +63,6 @@ exports.deleteUser = (req, res) => {
     res.json({ error: "Id is Invalid" });
   }
 };
+exports.welcomeUser = (req, res) => {
+  res.send("welcome to Node js mongodb crash course");
+};

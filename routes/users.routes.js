@@ -6,10 +6,12 @@ const {
   updateUser,
   updateBulkUser,
   deleteUser,
+  welcomeUser,
 } = require("../controllers/users.controller");
 const { userValidator, validate } = require("../middlewear/user.validator");
 const router = express.Router();
 
+router.get("/", welcomeUser);
 router.get("/user/random", getRandomUser);
 router.get("/user/all", getRandomAllUser);
 router.post("/user/save", userValidator, validate, saveNewUser);
